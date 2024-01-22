@@ -16,6 +16,7 @@ public class UserController {
     @PostMapping("/api/user/join")
     public UserResponseDto joinUser(@RequestBody UserRequestDto userRequestDto) {
         return userService.join(userRequestDto);
+        // hi
     }
 
     // GET Users
