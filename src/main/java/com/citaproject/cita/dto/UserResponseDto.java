@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 public class UserResponseDto {
 
-    private Long id;
-    private Integer studentNo;
-    private String name;
-    private Integer schoolYear;
-    private String email;
-    private String password;
+    private final Long id;
+    private final String studentNo;
+    private final String name;
+    private final Integer schoolYear;
+    private final String email;
+    private final String password;
 
     // Entity -> DTO
     public UserResponseDto(User userEntity) {
