@@ -16,10 +16,16 @@ public class UserResponseDto {
     // Entity -> DTO
     public UserResponseDto(User userEntity) {
         this.id = userEntity.getId();
-        this.studentNo = userEntity.getStudentNo();
+        this.studentNo = hideStudentNumber(userEntity.getStudentNo());
         this.name = userEntity.getName();
         this.schoolYear = userEntity.getSchoolYear();
         this.email = userEntity.getEmail();
         this.password = userEntity.getPassword();
+    }
+
+    private String hideStudentNumber(String studentNo) {
+        String mask = "*****";
+        String number = studentNo.substring(0, studentNo.length() - 5);
+        return number + mask;
     }
 }

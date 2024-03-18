@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <title>Test</title>
+</head>
+<body>
+<form id="registrationForm" method="post" action="/api/user/join">
+    <!-- Student No Field -->
+    <label for="studentNo">Student No:</label>
+    <input type="text" id="studentNo" name="studentNo" pattern="\d{9}" title="학번은 9자리입니다" required>
+    <br>
+
+    <!-- Name Field -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+
+    <!-- School Year Field -->
+    <label for="schoolYear">School Year:</label>
+    <input type="number" id="schoolYear" name="schoolYear" min="1" max="4" required>
+    <br>
+
+    <!-- Email Field -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+
+    <!-- Password Field -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" minlength="8" required>
+    <br>
+
+    <button id="btn" type="button">Register</button>
+</form>
+
+<div id="response"></div>
+
+<script>
+    document.querySelector("#btn").addEventListener('click', function() {
+        submitForm();
+    });
+
+    function submitForm() {
+        alert("clicked");
+        var formData = {
+            studentNo: document.getElementById("studentNo").value,
+            name: document.getElementById("name").value,
+            schoolYear: document.getElementById("schoolYear").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value
+        };
+
+        fetch("/api/user/join", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                document.getElementById('response').innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('response').innerHTML = 'Error occurred';
+            });
+    }
+</script>
+
+</body>
+</html>

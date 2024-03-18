@@ -3,6 +3,8 @@ package com.citaproject.cita.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -16,9 +18,9 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private Integer studentNo;
+    private String studentNo;
 
-    @Column(nullable = false)
+    @Column
     private String name;
 
     @Column(nullable = false)
@@ -30,4 +32,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 }
